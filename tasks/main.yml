@@ -1,2 +1,27 @@
 ---
-# tasks file for docker-plex
+- name: 'Start the plex docker container'
+  docker:
+    image: "linuxserver/plex"
+    name: "{{ docker_plex_container_name }}"
+    env:
+      PUID: '0'
+      PGID: '0'
+      VERSION: '{{ docker_plex_version }}'
+    volumes:
+      - '/etc/localtime:/etc/localtime:ro'
+      - '{{ docker_plex_mounted_directory }}/transcode:/transcode'
+      - '{{ docker_plex_mounted_directory }}/library:/config'
+      - '{{ docker_plex_mounted_directory }}/tv:/data/tv'
+      - '{{ docker_plex_mounted_directory }}/movies:/data/movies'
+    ports:
+      - '32400:32400'
+      - '32400:32400/udp'
+      - '32469:32469'
+      - '32469:32469/udp'
+      - '5353:5353/udp'
+      - '1900:1900/udp'
+    state: 'started'
+    restart_policy: 'always'
+    log_driver: 'syslog'
+    log_opt:
+      syslog-tag: "{{ docker_plex_container_name }}"
