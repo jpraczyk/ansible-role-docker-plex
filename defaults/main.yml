@@ -1,2 +1,22 @@
 ---
-# defaults file for docker-plex
+# Docker container name
+docker_plex_container_name: 'plex'
+
+# Plex version. Options are:
+# - specific version number e.g. '0.9.12.4.1192-9a47d21'
+# - 'plexpass'
+# - 'latest'
+docker_plex_version: 'latest'
+
+# Directory that will be used as the root of all plex-related configuration &
+# data.
+#
+# Assuming 'docker_plex_mounted_directory' is set to /tmp/plex_mount, then the
+# following directories will be automatically created if they don't already
+# exist:
+#
+# /tmp/plex_mount/transcode
+# /tmp/plex_mount/library
+# /tmp/plex_mount/tv
+# /tmp/plex_mount/movies
+docker_plex_mounted_directory: '/tmp/plex_mount'
