@@ -1,5 +1,7 @@
 ---
-- hosts: localhost
+- hosts: 'all'
   remote_user: root
+  become: true
   roles:
-    - docker-plex
+    - 'marvinpinto.docker'
+    - 'ansible-role-docker-plex'
